@@ -1,0 +1,390 @@
+{
+	"info": {
+		"_postman_id": "a933bdfb-5ecc-4c0e-8826-2978a7593285",
+		"name": "TheCatAPI_IntegrationTests_YuliiaSv",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18956641"
+	},
+	"item": [
+		{
+			"name": "/images/search",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"const jsonData = pm.response.json()[0];\r",
+							"pm.expect(jsonData.id).to.not.be.null;\r",
+							"pm.collectionVariables.set(\"image_id\", jsonData.id);"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "{{apiKey}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/images/search",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"images",
+						"search"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "image/upload",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "live_SQMK2pRdERYTlVhmOQZL3ayuR8qsEY9MK6w8pJ35FPgRtaRC2zNgxhZaqJOKDWR0",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "x-api-key",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "{{apiKey}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "multipart/form-data",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/C:/Users/sviat/OneDrive/Зображення/Робочий стіл/cat.jpeg"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{baseUrl}}/images/upload",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"images",
+						"upload"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/votes",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Vote created\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"const jsonData = pm.response.json();\r",
+							"pm.collectionVariables.set(\"vote_id\", jsonData.id);"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "live_SQMK2pRdERYTlVhmOQZL3ayuR8qsEY9MK6w8pJ35FPgRtaRC2zNgxhZaqJOKDWR0",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "x-api-key",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "live_SQMK2pRdERYTlVhmOQZL3ayuR8qsEY9MK6w8pJ35FPgRtaRC2zNgxhZaqJOKDWRO",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"image_id\": \"{{image_id}}\",\r\n  \"value\": 1,\r\n  \"sub_id\": \"Yuliia_Test\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/votes",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"votes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/favourites",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Favourite added\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"const jsonData = pm.response.json();\r",
+							"pm.collectionVariables.set(\"favourite_id\", jsonData.id);"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "live_SQMK2pRdERYTlVhmOQZL3ayuR8qsEY9MK6w8pJ35FPgRtaRC2zNgxhZaqJOKDWR0",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "x-api-key",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "x-api-key",
+						"value": "{{apiKey}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"image_id\": \"{{image_id}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/favourites",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"favourites"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/favourites",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"const favourites = pm.response.json();\r",
+							"const imageId = pm.collectionVariables.get(\"image_id\");\r",
+							"const found = favourites.find(fav => fav.image_id === imageId);\r",
+							"pm.expect(found).to.not.be.undefined;"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "live_SQMK2pRdERYTlVhmOQZL3ayuR8qsEY9MK6w8pJ35FPgRtaRC2zNgxhZaqJOKDWR0",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "x-api-key",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "{{apiKey}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/favourites",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"favourites"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/favourites/{{favourite_id}}",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Favourite deleted\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "{{apiKey}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/favourites/{{favourite_id}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"favourites",
+						"{{favourite_id}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "https://api.thecatapi.com/v1"
+		},
+		{
+			"key": "apiKey",
+			"value": "live_SQMK2pRdERYTlVhmOQZL3ayuR8qsEY9MK6w8pJ35FPgRtaRC2zNgxhZaqJOKDWRO"
+		},
+		{
+			"key": "image_id",
+			"value": ""
+		},
+		{
+			"key": "vote_id",
+			"value": ""
+		},
+		{
+			"key": "favourite_id",
+			"value": ""
+		}
+	]
+}
